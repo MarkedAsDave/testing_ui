@@ -12,7 +12,7 @@ const style = {
     transform: 'translate(-50%, -50%)',
     bgcolor: 'background.paper',
     boxShadow: 2,
-    width: "30%",
+    width: "31.5%",
     height: "80%",
     marginTop: "2%",
     borderRadius: 1.3
@@ -73,14 +73,13 @@ function Register() {
                                             It’s quick and easy.
                                         </Typography>
                                         <div style={{ display: "flex", alignItems: "center" }}>
-                                            <div style={{ flex: 1, backgroundColor: "#BDBDBD", height: "1px", marginTop: 10}} />
+                                            <div style={{ flex: 1, backgroundColor: "#BDBDBD", height: "1px", marginTop: 10, marginBottom: 10}} />
                                         </div>
-                                        <Grid item xs={6}  style={{alignItems: "center"}}>
-                                            <TextField variant="outlined" placeholder="Email" label="Email" />
-                                            </Grid>
-                                        <Grid item xs={6}  style={{alignItems: "center"}}>
-                                            <TextField variant="outlined" placeholder="Email" label="Email" />
-                                        </Grid>
+                                        
+                                            <TextField  size='small' placeholder="First name" label="First name" style={{marginRight: 10}} /> 
+                                            <TextField size='small' placeholder="Last name" label="Last name" />
+                                            <TextField  size='small' placeholder="Mobile number or email" label="Email" style={{width:'100%', marginTop: 10}} />
+                                            <TextField  size='small' placeholder="New Password" label="Password" style={{width:'100%', marginTop: 10}} />
                                     </Box>
                                 </Modal>
                             </FormControl>
