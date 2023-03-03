@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from "react"
 import axios from "axios";
-import { Card, CardContent, Grid, TextField, FormControl, Button, Link, Typography, Modal, Box,  } from "@mui/material";
+import { Card, CardContent, Grid, TextField, FormControl, Button, Link, Typography, Modal, Box, FormControlLabel, Radio, RadioGroup  } from "@mui/material";
 import { borderRadius, Container } from "@mui/system";
 
 
@@ -31,6 +31,11 @@ function Register() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const [value, setValue] = React.useState('female');
+
+    const handleChange = (event) => {
+    setValue(event.target.value);
+    };
 
   return (
 
@@ -79,7 +84,21 @@ function Register() {
                                             <TextField  size='small' placeholder="First name" label="First name" style={{marginRight: 10}} /> 
                                             <TextField size='small' placeholder="Last name" label="Last name" />
                                             <TextField  size='small' placeholder="Mobile number or email" label="Email" style={{width:'100%', marginTop: 10}} />
-                                            <TextField  size='small' placeholder="New Password" label="Password" style={{width:'100%', marginTop: 10}} />
+                                            <TextField  size='small' placeholder="New Password" label="Password" type="password" style={{width:'100%', marginTop: 10, marginBottom: 10}} />
+                                            <Typography style={{fontSize:15, color:"#525252"}}>Birthday</Typography>
+                                            <TextField  size='small' placeholder="Month" label="Month" style={{width:'31.5%', marginRight: 10}} />
+                                            <TextField  size='small' placeholder="Day" label="Day" style={{width:'31.5%',marginRight:10}} />
+                                            <TextField  size='small' placeholder="Year" label="Year" style={{width:'31.5%',}} />
+                                            <Typography style={{fontSize:15, color:"#525252", marginTop: 10}}>Gender</Typography>
+                                            <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange} style={{flexDirection:"row"}}>
+                                                <FormControlLabel value="female" control={<Radio />} label="Female" style={{marginRight:60, marginLeft: 30}} />
+                                                <FormControlLabel value="male" control={<Radio />} label="Male" style={{marginRight:60}}/>
+                                                <FormControlLabel value="other" control={<Radio />} label="Other" />
+                                            </RadioGroup>
+                                            <Typography style={{fontSize:12, color:"#525252", marginBottom: 10}}>People who use our service may have uploaded your contact information to Facebook. Learn more.</Typography>
+                                            <Typography style={{fontSize:12, color:"#525252", marginBottom: 10}}>By clicking Sign Up, you agree to our Terms, Privacy Policy and Cookies Policy. You may receive SMS Notifications from us and can opt out any time.</Typography>
+                                            <Button variant="contained" color="success" style={{backgroundColor:"#00a400", marginTop:10, marginBottom: 10, width: "45%", marginRight: "35%", marginLeft:"26.5%"}}
+                                                >Sign Up</Button>
                                     </Box>
                                 </Modal>
                             </FormControl>
