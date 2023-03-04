@@ -42,7 +42,7 @@ function Register() {
     const handleClose = () => setOpen(false);
 
 
-    
+    const [errorPassword, setErrorPassword] = useState('')
 
   return (
 
@@ -71,19 +71,27 @@ function Register() {
                                         <div style={{ flex: 1, backgroundColor: "#BDBDBD", height: "1px", marginBottom: 20}} />
                                 </div>
                                 <Button variant="contained" color="success" style={{backgroundColor:"#42b72a", marginBottom:10, marginTop:10}}
-                                    onClick={handleOpen}    >Create Account</Button>
+                                    onClick={handleOpen} >Create Account</Button>
                                 <Modal
                                     open={open}
                                     onClose={handleClose}
                                     aria-labelledby="modal-modal-title"
                                     aria-describedby="modal-modal-description">
+
                                     <Box sx={style} style={{padding: 15}}>
+
                                         <Typography style={{fontSize:32, fontWeight:"bold"}}>
                                             Sign Up
                                         </Typography>
+
+                                        <Typography style={{fontSize:11}}>
+                                            {errorPassword}
+                                        </Typography>
+                                        
                                         <Typography style={{fontSize:15, color:"#525252"}}>
                                             It’s quick and easy.
                                         </Typography>
+
                                         <div style={{ display: "flex", alignItems: "center" }}>
                                             <div style={{ flex: 1, backgroundColor: "#BDBDBD", height: "1px", marginTop: 10, marginBottom: 10}} />
                                         </div>
@@ -174,6 +182,9 @@ function Register() {
                                                     axios.post('http://127.0.0.1:8000/api/v1/accounts/users/', data).then((response) =>{
                                                         console.log(response.data)
                                                         
+                                                    }).catch(error => {
+                                                        const errorMessage = error.response.data;
+                                                        setErrorPassword(errorMessage.password)
                                                     })
                                                 }} >Sign Up</Button>
                                                 
@@ -188,22 +199,7 @@ function Register() {
             </Grid>
         </Container>
 
-        {/*<h1>Register diri</h1>
-        <p>{errorPassword}</p>
-        <input placeholder="username" onChange={(event) =>{
-            let d = data;
-            setData({...d, username: event.target.value});
-         }}/>
-
-        <input placeholder="email" onChange={(event) =>{
-            let d = data;
-            setData({...d, email: event.target.value});
-      }}/>
-
-        <input placeholder="password" type="password" onChange={(event) =>{
-            let d = data;
-            setData({...d, password: event.target.value});
-      }}/>
+        {/*
 
 <button onClick={() =>{
                 axios.post('http://127.0.0.1:8000/api/v1/accounts/users/', data).then((response) =>{
