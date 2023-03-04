@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from "react"
 import axios from "axios";
 import { Card, CardContent, Grid, TextField, FormControl, Button, Link, Typography, Modal, Box, FormControlLabel, Radio, RadioGroup  } from "@mui/material";
-import { borderRadius, Container } from "@mui/system";
+import { Container } from "@mui/system";
 
 
 const style = {
@@ -20,22 +20,29 @@ const style = {
 
 function Register() {
     const [data, setData] = useState({
-        username: '',
+        first_name: '',
+        last_name:'',
         email: '',
         password: '', 
+        gender: '',
+        birthdate:''
     })
-    const [errorPassword, setErrorPassword] = useState('')
+
+    function formatDate(year, month, day) {
+        const date = new Date(year, month, day)
+        const yearString = String(date.getFullYear())
+        const monthString = String(date.getMonth())
+        const dayString = String(date.getDate())
+        return `${yearString}-${monthString}-${dayString}`
+      }
 
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const [value, setValue] = React.useState('female');
 
-    const handleChange = (event) => {
-    setValue(event.target.value);
-    };
+    
 
   return (
 
@@ -81,24 +88,95 @@ function Register() {
                                             <div style={{ flex: 1, backgroundColor: "#BDBDBD", height: "1px", marginTop: 10, marginBottom: 10}} />
                                         </div>
                                         
-                                            <TextField  size='small' placeholder="First name" label="First name" style={{marginRight: 10}} /> 
-                                            <TextField size='small' placeholder="Last name" label="Last name" />
-                                            <TextField  size='small' placeholder="Mobile number or email" label="Email" style={{width:'100%', marginTop: 10}} />
-                                            <TextField  size='small' placeholder="New Password" label="Password" type="password" style={{width:'100%', marginTop: 10, marginBottom: 10}} />
+                                            <TextField  size='small' placeholder="First name" label="First name" style={{marginRight: 10}} onChange={(event) =>{
+                                                    let d = data;
+                                                    setData({...d, first_name: event.target.value});
+                                                    }}/> 
+
+                                            <TextField size='small' placeholder="Last name" label="Last name" onChange={(event) =>{
+                                                    let d = data;
+                                                    setData({...d, last_name: event.target.value});
+                                                    }}/> 
+
+                                            <TextField  size='small' placeholder="Mobile number or email" label="Email" style={{width:'100%', marginTop: 10}} onChange={(event) =>{
+                                                    let d = data;
+                                                    setData({...d, email: event.target.value});
+                                                    }}/> 
+
+                                            <TextField  size='small' placeholder="New Password" label="Password" type="password" style={{width:'100%', marginTop: 10, marginBottom: 10}} onChange={(event) =>{
+                                                    let d = data;
+                                                    setData({...d, password: event.target.value});
+                                                    }}/> 
+                                          
                                             <Typography style={{fontSize:15, color:"#525252"}}>Birthday</Typography>
-                                            <TextField  size='small' placeholder="Month" label="Month" style={{width:'31.5%', marginRight: 10}} />
-                                            <TextField  size='small' placeholder="Day" label="Day" style={{width:'31.5%',marginRight:10}} />
-                                            <TextField  size='small' placeholder="Year" label="Year" style={{width:'31.5%',}} />
+                                          
+                                            <TextField  size='small' placeholder="Year" label="Year" style={{width:'31.5%', marginRight: 10}} onChange={(event) => {
+                                                let d = data
+                                                setData({
+                                                    ...d,
+                                                    birthdate: formatDate(event.target.value, data.month, data.day), // Format the date and update the state
+                                                    year: event.target.value,
+                                                })
+                                                }}
+                                            />
+                                          
+                                          
+                                            <TextField  size='small' placeholder="Month" label="Month" style={{width:'31.5%',marginRight:10}} onChange={(event) => {
+                                                let d = data
+                                                setData({
+                                                    ...d,
+                                                    birthdate: formatDate(data.year, event.target.value, data.day), // Format the date and update the state
+                                                    month: event.target.value,
+                                                })
+                                                }}
+                                            />
+                                          
+                                          
+                                            <TextField  size='small' placeholder="Day" label="Day" style={{width:'31.5%',}} onChange={(event) => {
+                                                let d = data
+                                                setData({
+                                                    ...d,
+                                                    birthdate: formatDate(data.year, data.month, event.target.value), // Format the date and update the state
+                                                    day: event.target.value,
+                                                })
+                                                }}
+                                            />
+                                            
+                                          
                                             <Typography style={{fontSize:15, color:"#525252", marginTop: 10}}>Gender</Typography>
-                                            <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange} style={{flexDirection:"row"}}>
-                                                <FormControlLabel value="female" control={<Radio />} label="Female" style={{marginRight:60, marginLeft: 30}} />
-                                                <FormControlLabel value="male" control={<Radio />} label="Male" style={{marginRight:60}}/>
+                                          
+                                            <RadioGroup
+                                                row
+                                                aria-labelledby="demo-row-radio-buttons-group-label"
+                                                name="row-radio-buttons-group" 
+                                                onChange={(event) =>{
+                                                    let d = data;
+                                                    setData({...d, gender: event.target.value});
+                                                    }}
+                                            >
+                                                <FormControlLabel value="female" control={<Radio />} label="Female" />
+                                                <FormControlLabel value="male" control={<Radio />} label="Male" />
                                                 <FormControlLabel value="other" control={<Radio />} label="Other" />
+                                                <FormControlLabel
+                                                value="disabled"
+                                                disabled
+                                                control={<Radio />}
+                                                label="other"
+                                                />
                                             </RadioGroup>
+                                           
                                             <Typography style={{fontSize:12, color:"#525252", marginBottom: 10}}>People who use our service may have uploaded your contact information to Facebook. Learn more.</Typography>
+                                           
                                             <Typography style={{fontSize:12, color:"#525252", marginBottom: 10}}>By clicking Sign Up, you agree to our Terms, Privacy Policy and Cookies Policy. You may receive SMS Notifications from us and can opt out any time.</Typography>
-                                            <Button variant="contained" color="success" style={{backgroundColor:"#00a400", marginTop:10, marginBottom: 10, width: "45%", marginRight: "35%", marginLeft:"26.5%"}}
-                                                >Sign Up</Button>
+                                           
+                                            <Button variant="contained" color="success" style={{backgroundColor:"#00a400", marginTop:10, marginBottom: 10, 
+                                                width: "45%", marginRight: "35%", marginLeft:"26.5%"}}  onClick={() =>{
+                                                    axios.post('http://127.0.0.1:8000/api/v1/accounts/users/', data).then((response) =>{
+                                                        console.log(response.data)
+                                                        
+                                                    })
+                                                }} >Sign Up</Button>
+                                                
                                     </Box>
                                 </Modal>
                             </FormControl>
