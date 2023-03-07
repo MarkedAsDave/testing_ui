@@ -3,6 +3,7 @@ import { useState } from "react"
 import axios from "axios";
 import { Card, CardContent, Grid, TextField, FormControl, Button, Link, Typography, Modal, Box, FormControlLabel, Radio, RadioGroup  } from "@mui/material";
 import { Container } from "@mui/system";
+import CloseIcon from '@mui/icons-material/Close';
 
 
 const style = {
@@ -79,10 +80,16 @@ function Register() {
                                     aria-describedby="modal-modal-description">
 
                                     <Box sx={style} style={{padding: 15}}>
+                                        
+                                        <Button style={{position: 'absolute', right: 0}}
+                                           onClick={handleClose}
+                                            ><CloseIcon></CloseIcon></Button>
 
                                         <Typography style={{fontSize:32, fontWeight:"bold"}}>
                                             Sign Up
+                                            
                                         </Typography>
+                                        
 
                                         <Typography style={{fontSize:11}}>
                                             {errorPassword}
@@ -198,17 +205,6 @@ function Register() {
 
             </Grid>
         </Container>
-
-        {/*
-
-<button onClick={() =>{
-                axios.post('http://127.0.0.1:8000/api/v1/accounts/users/', data).then((response) =>{
-                    console.log(response.data)
-                }).catch(error => {
-                    const errorMessage = error.response.data;
-                    setErrorPassword(errorMessage.password)
-                })
-            }} >Register</button>*/}
 
     </>
   )
