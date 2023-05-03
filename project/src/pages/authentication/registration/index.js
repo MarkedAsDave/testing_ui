@@ -48,10 +48,10 @@ function Register() {
   return (
 
 <>
-        <Container maxWidth style={{alignSelf: "center", alignContents: "center"}}>
-            <Grid container spacing={2} style={{padding: 100, backgroundColor: '#F0F2F5', height: '100v'}}>
-                <Grid item xs={6}>
-                    <CardContent style= {{marginTop:70, marginLeft:50, marginRight:50}}>
+        <Container maxWidth style={{alignSelf: "center", alignContents: "center", height: "100%", }}>
+            <Grid container spacing={2} style={{ backgroundColor: '#F0F2F5', height: "100vh", width: "100vw"}}>
+                <Grid style={{alignItems: "center", alignContents:"center", marginLeft: "10%", alignSelf: "center" }} >
+                    <CardContent style= {{ alignItems: "center", alignContents:"center"}}>
                         <Typography gutterBottom variant="h5" component="div" style={{color:"#1877f2", fontSize: 60, fontWeight: "bolder" }}>
                             facebook
                         </Typography>
@@ -60,9 +60,9 @@ function Register() {
                         </Typography>
                     </CardContent>
                 </Grid>
-                <Grid item xs={6}  style={{alignItems: "center"}}>
-                   <Card sx={{ maxWidth: 400}} style={{marginTop: 40, marginLeft:60}} >
-                        <CardContent >
+                <Grid  style={{alignItems: "center", alignContents:"center", alignSelf: "center"}} >
+                   <Card sx={{ maxWidth: 500}} style={{ width: "100vw", alignContents: "center", alignSelf: "center", marginBottom: "10%"}} >
+                        <CardContent>
                             <FormControl fullWidth a>
                                 <TextField variant="outlined" placeholder="Email" label="Email" />
                                 <TextField variant="outlined" placeholder="Password" type="password" label="Password" style={{marginTop: 15, marginBottom: 15}} />
