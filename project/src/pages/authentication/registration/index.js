@@ -58,6 +58,7 @@ function Register() {
                                 <Button variant="contained" color="success" style={{backgroundColor:"#42b72a", marginBottom:10, marginTop:10}}
                                     onClick={handleOpen} >Create Account</Button>
                                 <Modal
+                                
                                     open={open}
                                     onClose={handleClose}
                                     aria-labelledby="modal-modal-title"
